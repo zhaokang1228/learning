@@ -1,12 +1,22 @@
 Ray是UC Berkeley RISELab新推出的高性能分布式执行框架，它使用了和传统分布式计算系统不一样的架构和对分布式计算的抽象方式，具有比Spark更优异的计算性能。
+通过个人的使用，觉得是一个非常不错的并行框架，特别在超参数搜索和强化学习方面有很强的使用性。
 
-Ray目前还处于实验室阶段，最新版本为0.5版本。虽然Ray自称是面向AI应用的分布式计算框架，但是它的架构具有通用的分布式计算抽象。本文对Ray进行简单的介绍.
+Ray目前还处于实验室阶段，最新版本为0.7.3版本。虽然Ray自称是面向AI应用的分布式计算框架，但是它的架构具有通用的分布式计算抽象。本文对Ray进行简单的介绍.
 Ray是一个分布式执行引擎。可以在单个机器上运行相同的代码以实现高效的多处理，并且可以在群集上使用它来进行大型计算。
 Ray现在已经可是在Linux和MacOS系统上运行，暂不支持window。和TensorFlow和pytorch完美兼容。
 
+## 安装　
+简单快捷的方法,安装稳定版本
+
+```
+pip install -U ray
+```
+
+另外也可以通过下载最新的wheels进行安装，[参考官网链接](https://ray.readthedocs.io/en/releases-0.7.3/installation.html#trying-snapshots-from-master)
+
 ## 一、简单使用
 
-安装 pip install  ray
+
 1.  **ray.init()** 启动ray
  本地启动
  
