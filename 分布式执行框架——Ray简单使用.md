@@ -25,7 +25,7 @@ pip install -U ray
 import ray
 ray.init()
 ```
-结果
+结果：
 
 ```
 Process STDOUT and STDERR is being redirected to /tmp/raylogs/.
@@ -40,6 +40,7 @@ View the web UI at http://localhost:8888/notebooks/ray_ui262.ipynb?token=bfb2256
 
 
 ```
+因我安装的版本较低（0.5.3），此处打印的结果可能和最新版本不太一样。
 注：如果在ray.init()这一步报错如下
 ![在这里插入图片描述](./images/1571914618409.png)
 redis.exception.DataError:错。
@@ -48,14 +49,14 @@ redis.exception.DataError:错。
 
     pip install -U redis==2.10.6
 
-链接集群
+在集群上启动ray，此处只做简单介绍，具体详细集群上ray，在后边具体介绍。
 
 ```
 import ray
-ray.init(redis_address="地址")
+ray.init(redis_address="地址:端口") 	# ray.init(redis_address="10.10.10.133:6379")
 ```
-2.**ray.put()**  对python不同函数或值等放入ray内存库中，ray.put()  返回id
-
+2.**ray.put()**  对python不同函数或值等放入ray内存库中，ray.put()  返回id 。就相当于把python对象分装起来，返回此对象id，使用的时候通过对应ray.get(id)获取对应的对象。
+特别是对于大型对象通过调用id的调用，减少真实值的调用，减少内存的使用。具体更详细的功能再后边介绍。
 ```
 
 def h():
@@ -70,7 +71,8 @@ print(ray.get(h_id))
 14
 ```
 
-h()通过ray.put()放入ray库中，h_id即为其ray中id。通过ray.get()获取其真是值
+h()通过ray.put()放入ray库中，h_id即为其在ray中id。通过ray.get()获取其真实值。
+
 3 . **ray.get()** 通过id获取对应的值
 
 ```
@@ -95,7 +97,7 @@ Ray中调用remote函数的关键流程如下：
 	3.本地调度器决定任务对象是在本地调度还是发送给全局调度器。如果任务对象的依赖（参数）在本地的ObejctStore已经存在且本地的CPU和GPU计算资源充足，那么本地调度器将任务分配给本地的WorkerProcess执行。否则，任务对象被发送给全局调度器并存储到任务表（TaskTable）中，全局调度器根据当前的任务状态信息决定将任务发给集群中的某一个本地调度器。
 	4.本地调度器收到任务对象后（来自本地的任务或者全局调度分配的任务），会将其放入一个任务队列中，等待计算资源和本地依赖满足后分配给WorkerProcess执行。
 	5.Worker收到任务对象后执行该任务，并将函数返回值存入ObjectStore，并更新Master的对象表（ObjectTable）信息。
-**注意：@ray.remote定义过得类或者函数只能调用此函数前边的未定义@ray.remote的函数。**
+**注意：@ray.remote定义的类或者函数只能调用此函数前边的未定义@ray.remote的函数。即不能把一个ray的对象id作为参数传给一个远程对象。**
 ```
 @ray.remote
 def A():
@@ -154,9 +156,9 @@ print(ray.get(a))
     该任务被Driver直接分配到创建该Actor对应的本地执行器执行，这个操作绕开了全局调度器（Worker是否也可以使用Actor直接分配任务尚存疑问）。
     返回Actor方法调用结果的ObjectID。
 
-为了保证Actor状态的一致性，对同一个Actor的方法调用是串行执行的。
+为了保证Actor状态的一致性，对同一个Actor的方法调用是串行执行的。即Actor之间是并行的，同一个Actor的前后调用是串行。
 
-5.ray.wait()操作支持批量的任务等待，基于此可以实现一次性获取多个ID对应的数据。
+5. **ray.wait()** 操作支持批量的任务等待，基于此可以实现一次性获取多个ID对应的数据。此函数可以理解为只要对应的remote对象运行结束即返回（达到对于的等待时间），不会等待所有远程对象都结束在返回对饮对象ｉｄ。
 
 
 ```
@@ -178,8 +180,6 @@ ready2_ids, remaining2_ids = ray.wait(results2, num_returns=3, timeout=5000)
 print(ray.get(ready2_ids))
 print(ray.get(remaining2_ids))
 
-
-
 ```
 结果
 
@@ -194,7 +194,7 @@ print(ray.get(remaining2_ids))
 结果说明：f.remote()是并行的。
 第一个for循环因为超时，所以ready_ids为空，然后程序等呆运行结束把最后的结果全部给remaining_ids。
 第二个for循环因为平行的原因，没有超时，所示ready2_ids有三个值ID，remaining2_ids有一个值ID。
-注意：若是点个人电脑运行此程序电脑核心必须大于等于四核。本人电脑四核，故有如下情况。
+注意：若个人电脑运行此程序电脑核心必须大于等于四核。本人电脑四核，故有如下情况。
 
 ```
 @ray.remote
