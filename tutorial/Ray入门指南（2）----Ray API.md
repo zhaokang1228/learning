@@ -499,4 +499,5 @@ ray timeline [OPTIONS]
 
 此篇主要参考Ray官网，如有错误，请阅读者提出指正，谢谢！
 原英文链接：https://ray.readthedocs.io/en/latest/api.html     
-ray综述介绍：https://blog.csdn.net/weixin_43255962/article/details/88689665
+ray综述介绍：[ＣＳＤＮ链接](https://blog.csdn.net/weixin_43255962/article/details/88689665)  [github链接](https://github.com/zhaokang1228/learning/blob/master/tutorial/Ray%E5%85%A5%E9%97%A8%E6%8C%87%E5%8D%97%EF%BC%881%EF%BC%89----ray%E5%88%86%E5%B8%83%E5%BC%8F%E6%A1%86%E6%9E%B6%E7%9A%84%E4%BB%8B%E7%BB%8D.md)
+
