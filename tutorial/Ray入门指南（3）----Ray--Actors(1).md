@@ -1,8 +1,8 @@
-﻿本篇主要介绍actor的定义、创建，应用及内部的运行机制。**actor之间的调度是并行的，同一个actor上的运行是串行的。** actor是一个有状态的worker，其在python脚本中的表示形式就是把一个类定义为远程类。着重列举了的actor几个方面应用的例子---actor并行和串行运行、用actor进行强化学习状态共享、在神经网络中应用和actor句柄的转递。其中的神经网络的例子可以作为一个典型的事例---tensorflow代码在在Ray中运行神经网络事例。最后actor的限制问题。
+﻿本篇主要介绍actor的定义、创建，应用及内部的运行机制。**actor之间的调度是并行的，同一个actor上的运行是串行的。** actor是一个有状态的worker，其在python脚本中的表示形式就是把一个类定义为远程类。着重列举了actor的几个应用实例---actor并行和串行运行、用actor进行强化学习状态共享、在神经网络中应用和actor句柄的转递。其中的神经网络的例子可以作为一个典型的事例---tensorflow代码在在Ray中运行神经网络事例。最后actor的限制问题。
 ## Actors
-远程(remote) 函数在Ray中是功能性的和实用性函数。将自己限制在远程函数中可以实现分布式函数编程，这对于许多用例来说都是很好的，但是在实践中却受到了一定的限制。
+远程(remote) 函数在Ray中是功能性和实用性函数。将自己限制在远程函数中可以实现分布式函数编程，这对于许多用例来说都是很好的，但是在实践中却受到了一定的限制。
 Ray使用actor扩展了数据流模型。actor本质上是一个有状态的worker(或服务)。当实例化一个新actor时，将创建一个新worker，并将acto的方法调度到该特定worker上，并且可以访问该worker并更改其状态。
-actor的样式就是把一个类前面加上`@ray.remote`，这个类就变成一个actor.
+actor的形式之一是把一个类前面加上`@ray.remote`，这个类就变成一个actor，还有其他的定义actor的形式把一个类作为参数传到ray.remote(类Ａ)。
 
 
 假设我们已经启动Ray。
@@ -24,14 +24,14 @@ class Counter(object):
         self.value += 1
         return self.value
 ```
-我们可是实例化这个actor通过`Counter.remote()` 。
+可是通过`Counter.remote()`来实例化这个actor 。
 
     a1 = Counter.remote()
     a2 = Counter.remote()
 
 实例化参与者时，将发生以下事件。
 
- 1. 选择集群中的一个节点，并在该节点上创建一个工作进程(由该节点上的本地调度程序创建)，以便运行对参与者调用的方法。
+ 1. 选择集群中的一个节点，并在该节点上创建一个工作进程(由该节点上的本地调度程序创建)，以便调用对参与者的方法。
  2. 在worker上创建一个Counter对象，并且运行Counter构造器。
 
 ## actor的应用--并行和串行
@@ -47,9 +47,9 @@ a2.increment.remote()  # ray.get returns 1
  2. 任务由驱动程序的本地调度程序直接分配给负责actor的本地调度程序。
  3. 一个对象ID被返回。
  
- 我们调用`ray.get`这个对象ID检索真实值。
+ 通过`ray.get(id)`来获取这个对象ID检索真实值。
  类似地，我们调用`a2.increment.remote()`在第二个`Counter` actor上生成一个任务。
-由于这两个任务运行在不同的actor上，所以它们可以并行执行(注意，只有actor方法将在actor worker上调度，而常规远程函数不会)。
+由于这两个任务运行在不同的actor上，所以它们可以并行执行(注意，只有actor方法在actor worker上调度，而常规远程函数不会)。
 
 另一方面，在同一个`Counter`actor上调用的方法按调用顺序串行执行。因此，它们可以彼此共享状态，如下所示。
 
@@ -61,7 +61,7 @@ counters = [Counter.remote() for _ in range(10)]
 results = ray.get([c.increment.remote() for c in counters])
 print(results)  # prints [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
 
-# 这些任务是顺序执行的，共享状态
+# 这些任务是顺序执行的，共享状态，因为这是同一个actor内部的调用。
 results = ray.get([counters[0].increment.remote() for _ in range(5)])
 print(results)  # prints [2, 3, 4, 5, 6]
 ```
@@ -138,7 +138,7 @@ class NeuralNetOnGPU(object):
                 self.sess.run(init)
 ```
 为了表示一个actor需要一个GPU，我们将`num_gpu =1`传入`ray.remote`。请注意，为了使其工作，Ray必须使用一些gpu启动，例如，通过`Ray .init(num_gpu =2)`。否则，当您试图用`NeuralNetOnGPU.remote()`实例化GPU版本时，将抛出一个异常，说明系统中没有足够的GPU。
-当创建actor时，它将访问允许通过`ray.get_gpu_ids()`使用的gpu ID列表。
+当创建actor时，可以通过通过`ray.get_gpu_ids()`获得gpu ID列表。
 这是一个整数列表，比如[]、[1]或[2,5,6]。因为我们传入了`ray.remote(num_gpu =1)`，所以这个列表的长度为1。
 
 我们可以把这些放在一起，如下。
@@ -259,5 +259,5 @@ for _ in range(10):
 
 此篇主要参考Ray官网，如有错误，请阅读者提出指正，谢谢！
 原英文链接：https://ray.readthedocs.io/en/latest/actors.html
-ray综述介绍：https://blog.csdn.net/weixin_43255962/article/details/88689665
+
 
