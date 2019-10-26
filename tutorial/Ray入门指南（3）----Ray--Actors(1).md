@@ -2,7 +2,7 @@
 ## Actors
 远程(remote) 函数在Ray中是功能性和实用性函数。将自己限制在远程函数中可以实现分布式函数编程，这对于许多用例来说都是很好的，但是在实践中却受到了一定的限制。
 Ray使用actor扩展了数据流模型。actor本质上是一个有状态的worker(或服务)。当实例化一个新actor时，将创建一个新worker，并将acto的方法调度到该特定worker上，并且可以访问该worker并更改其状态。
-actor的形式之一是把一个类前面加上`@ray.remote`，这个类就变成一个actor，还有其他的定义actor的形式把一个类作为参数传到ray.remote(类Ａ)。
+actor的形式之一是把一个类前面加上`@ray.remote`，这个类就变成一个actor，还有其他的定义actor的形式把一个类作为参数传到`ray.remote(类Ａ)`。
 
 
 假设我们已经启动Ray。
