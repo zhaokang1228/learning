@@ -218,7 +218,7 @@ _, _ = f.bar.remote()
 
 *Options*
 | --node-ip-address <node_ip_address> | 　 
-|---|---|
+| --- | --- |
 |此节点的IP地址  | 　 
 
 | --redis-address <redis_address> |  
