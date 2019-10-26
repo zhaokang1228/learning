@@ -210,11 +210,7 @@ _, _ = f.bar.remote()
 
     ray start [OPTIONS]
 
-|  非官方个   |  
-| --- | 
-|     |  
-|     |    
-|     |   
+
 
 *Options*
 
@@ -231,100 +227,100 @@ _, _ = f.bar.remote()
 |用于启动Redis的端口 |  
 
 |--num-redis-shards <num_redis_shards>  |  
-|--|--|
+|--|
 |  除主Redis碎片外，要使用的其他Redis碎片的数量|  
 
 |--redis-max-clients <redis_max_clients>|  
-|--|--|
-| 如果提供，请尝试使用此最大客户端数量配置Redis。 |  |
+|--|
+| 如果提供，请尝试使用此最大客户端数量配置Redis。 |  
 
 |--redis-password <redis_password>|  
 |--|--|
 |如果提供了该密码，则使用该密码进行安全的Redis端口 |  |
 
 |--redis-shard-ports <redis_shard_ports>|  
-|--|--|
-| 用于除主Redis碎片之外的Redis碎片的端口 |  |
+|--|
+| 用于除主Redis碎片之外的Redis碎片的端口 |  
 
 |  --object-manager-port <object_manager_port>|  
-|--|--|
-|  用于启动对象管理器的端口|  |
+|--|
+|  用于启动对象管理器的端口|  
 
 |  --object-store-memory <object_store_memory>  |
-|--|--|
-| 用于启动对象存储的内存量(以字节为单位)。默认情况下，这个上限为20GB，但可以设置得更高。 |  |
+|--|
+| 用于启动对象存储的内存量(以字节为单位)。默认情况下，这个上限为20GB，但可以设置得更高。 |  
 
 |--redis-max-memory <redis_max_memory>  |
-|--|--|
-|  允许redis使用的最大内存量(以字节为单位)。一旦超过这个限制，redis将开始LRU清除条目。这只适用于切分的redis表(任务、对象和概要表)。默认情况下，这是10GB的上限，但可以设置得更高。|  |
+|--|
+|  允许redis使用的最大内存量(以字节为单位)。一旦超过这个限制，redis将开始LRU清除条目。这只适用于切分的redis表(任务、对象和概要表)。默认情况下，这是10GB的上限，但可以设置得更高。|  
 
 |--num-cpus <num_cpus>  |
-|--|--|
-| 此节点上的cpu数量 |  |
+|--|
+| 此节点上的cpu数量 |  
 
 |--num-gpus <num_gpus>  |
-|--|--|
+|--|
 |  此节点上的gpu数量|  |
 
 |--resources <resources>  |
-|--|--|
-|  将资源名称映射到资源数量的JSON序列化字典|  |
+|--|
+|  将资源名称映射到资源数量的JSON序列化字典|  
 
 |--head  |
-|--|--|
-|为head节点提供这个参数  |  |
+|--|
+|为head节点提供这个参数  |  
 
 |--include-webui|  
-|--|--|
-| 如果应该启动UI，则提供此参数 |  |
+|--|
+| 如果应该启动UI，则提供此参数 |  
 
 |--block|  
-|--|--|
-|  在此命令中提供此参数以永久阻塞|  |
+|--|
+|  在此命令中提供此参数以永久阻塞|  
 
 |--plasma-directory <plasma_directory>|  
-|--|--|
-|对象存储用于内存映射文件的目录  |  |
+|--|
+|对象存储用于内存映射文件的目录  |  
 
 |--huge-pages| 
-|--|--|
-|  在对象存储中启用对大页面的支持|  |
+|--|
+|  在对象存储中启用对大页面的支持|  
 
 |--autoscaling-config <autoscaling_config>  |
-|--|--|
-|  包含自动缩放配置的文件|  |
+|--|
+|  包含自动缩放配置的文件|  
 
 |--no-redirect-worker-output  |
-|--|--|
-|不重定向worker的标准输出和标准derr到文件  |  |
+|--|
+|不重定向worker的标准输出和标准derr到文件  |  
 
 |  --plasma-store-socket-name <plasma_store_socket_name>  |
-|--|--|
-| 手动指定等plasma存储的套接字名称 |  |
+|--|
+| 手动指定等plasma存储的套接字名称 |  
 
 |--raylet-socket-name <raylet_socket_name> |
-|--|--|
-|  手动指定raylet进程的套接字路径|  |
+|--|
+|  手动指定raylet进程的套接字路径|  
 
 |--temp-dir <temp_dir>  |
-|--|--|
-|  手动指定Ray进程的根临时目录|  |
+|--|
+|  手动指定Ray进程的根临时目录|  
 
 |--include-java  |
-|--|--|
-| 启用Java worker支持。 | |
+|--|
+| 启用Java worker支持。 | 
 
 |--java-worker-options <java_worker_options>  |
-|--|--|
-|覆盖启动Java worker的选项。  |  |
+|--|
+|覆盖启动Java worker的选项。  |  
 
 |--internal-config <internal_config>  |
-|--|--|
-|不要使用这个。这仅用于调试/开发目的。  |  |
+|--|
+|不要使用这个。这仅用于调试/开发目的。  |  
 
 |--load-code-from-local  |
-|--|--|
-| 指定从本地文件加载代码还是从GCS序列化加载代码。 |  |
+|--|
+| 指定从本地文件加载代码还是从GCS序列化加载代码。 |  
 
 **ray stop（ray 关闭）**
 
@@ -336,34 +332,34 @@ _, _ = f.bar.remote()
     ray up [OPTIONS] CLUSTER_CONFIG_FILE
 *Options*
 |--no-restart   |
-|--|--|
+|--|
 | 是否在更新期间跳过重新启动Ray服务。这样可以避免中断正在运行的作业。  |
 
 |  --restart-only|
-|--|--|
-|  是否跳过运行设置命令，只重启Ray。这不能与“no-restart”一起使用。|  |
+|--|
+|  是否跳过运行设置命令，只重启Ray。这不能与“no-restart”一起使用。|  
 
 |--min-workers <min_workers>  |
-|--|--|
-| 覆盖已配置的集群最小worker节点计数 |  |
+|--|
+| 覆盖已配置的集群最小worker节点计数 |  
 
 |--max-workers <max_workers>  |
-|--|--|
+|--|
 |  覆盖已配置的集群最大worker节点计数|  |
 
 |-n, --cluster-name <cluster_name>  |
-|--|--|
-| 覆盖已配置的集群名称。 |  |
+|--|
+| 覆盖已配置的集群名称。 |  
 
 |-y, --yes  |
-|--|--|
-|不要要求确认。  |  |
+|--|
+|不要要求确认。  |  
 
 *Arguments*
 
 |CLUSTER_CONFIG_FILE  |
-|--|--|
-| 需要的参数 |  |
+|--|
+| 需要的参数 |  
 
 **ray down**
 拆下Ray集群部件
@@ -374,22 +370,22 @@ ray down [OPTIONS] CLUSTER_CONFIG_FILE
 *Options*
 
 |--workers-only  |
-|--|--|
-|只摧毁worker。  |  |
+|--|
+|只摧毁worker。  |  
 
 |-y, --yes  |
-|--|--|
-| 不要求确认 |  |
+|--|
+| 不要求确认 |  
 
 |-n, --cluster-name <cluster_name>  |
-|--|--|
-| 覆盖已配置的集群名称。 |  |
+|--|
+| 覆盖已配置的集群名称。 |  
 
 *Arguments*
 
 |CLUSTER_CONFIG_FILE|  |
-|--|--|
-|需要的参数  |  |
+|--|
+|需要的参数  |  
 
 **ray exec**
 进入ray集群中
@@ -399,42 +395,42 @@ ray down [OPTIONS] CLUSTER_CONFIG_FILE
 *Options*
 
 |--docker |
-|--|--|
-|  在cluster_config中指定的docker容器中运行命令。|  |
+|--|
+|  在cluster_config中指定的docker容器中运行命令。|  
 
 |--stop| 
-|--|--|
-|命令运行完后停止集群。  |  |
+|--|
+|命令运行完后停止集群。  |  
 
 | --start  |
-|--|--|
-|如果需要，启动集群。  |  |
+|--|
+|如果需要，启动集群。  |  
 
 |--screen  |
-|--|--|
-|在屏幕上运行该命令。  |  |
+|--|
+|在屏幕上运行该命令。  |  
 
 |--tmux  |
-|--|--|
-| 在tmux中运行该命令。 |  |
+|--|
+| 在tmux中运行该命令。 |  
 
 |-n, --cluster-name <cluster_name>  |
-|--|--|
-|  覆盖已配置的集群名称。|  |
+|--|
+|  覆盖已配置的集群名称。|  
 
 | --port-forward <port_forward>  |
-|--|--|
-| 端口转发。 |  |
+|--|
+| 端口转发。 |  
 
 *Arguments*
 
 |CLUSTER_CONFIG_FILE  |
-|--|--|
-|需要的参数  |  |
+|--|
+|需要的参数  |  
 
 |CMD  |
-|--|--|
-| 需要的参数 |  |
+|--|
+| 需要的参数 |  
 
 **ray attach**
 进入ray集群中
@@ -445,25 +441,25 @@ ray attach [OPTIONS] CLUSTER_CONFIG_FILE
 *Options*
 
 |--start|  
-|-------|--|
-|     如果需要，启动集群。  |  |
+|----|
+|     如果需要，启动集群。  |  
 
 |--tmux  |
-|--|--|
-| 在tmux中运行该命令。 |  |
+|--|
+| 在tmux中运行该命令。 |  
 
 |-n, --cluster-name <cluster_name>  |
-|--|--|
-|覆盖已配置的集群名称。  |  |
+|--|
+|覆盖已配置的集群名称。  |  
 
 |-N, --new  |
-|--|--|
-| 强制创建一个新屏幕 |  |
+|--|
+| 强制创建一个新屏幕 |  
 
 *Arguments*
 |CLUSTER_CONFIG_FILE  |
-|--|--|
-|需要的参数  |  |
+|--|
+|需要的参数  |  
 
 **ray get_head_ip**
 获取头节点ip地址
@@ -474,14 +470,14 @@ ray get_head_ip [OPTIONS] CLUSTER_CONFIG_FILE
 *Options*
 
 |-n, --cluster-name <cluster_name>  |
-|--|--|
-|覆盖已配置的集群名称。  |  |
+|--|
+|覆盖已配置的集群名称。  |  
 
 *Arguments*
 
 |CLUSTER_CONFIG_FILE  |
-|--|--|
-| 需要的参数 |  |
+|--|
+| 需要的参数 |  
 
 **ray stack**
 
@@ -497,8 +493,8 @@ ray timeline [OPTIONS]
 *Options*
 
 | --redis-address <redis_address>  |
-|--|--|
-| 覆盖要连接的redis地址 |  |
+|--|
+| 覆盖要连接的redis地址 |  
 
 
 此篇主要参考Ray官网，如有错误，请阅读者提出指正，谢谢！
