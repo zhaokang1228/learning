@@ -210,13 +210,14 @@ _, _ = f.bar.remote()
 
     ray start [OPTIONS]
 
-|  非官方个   |  方法   |
+|  非官方个   |  
 | --- | --- | 
 |     |     |   
 |     |     |   
 |     |     |   
 
 *Options*
+
 | --node-ip-address <node_ip_address> | 　 
 | --- | --- |
 |此节点的IP地址  | 　 
