@@ -211,10 +211,10 @@ _, _ = f.bar.remote()
     ray start [OPTIONS]
 
 |  非官方个   |  
-| --- | --- | 
-|     |     |   
-|     |     |   
-|     |     |   
+| --- | 
+|     |  
+|     |    
+|     |   
 
 *Options*
 
