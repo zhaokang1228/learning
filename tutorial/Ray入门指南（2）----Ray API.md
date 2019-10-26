@@ -1,5 +1,5 @@
 ## Ray API
-此篇主要介绍Ray的API。主要有两部分，一部分是ray再python代码中的应用；另一部分是ray在命令行中的应用。
+此篇主要介绍Ray的API。主要有两部分，一部分是ray在python代码中的应用；另一部分是ray在命令行中的应用。
 ```
 ray.init(redis_address=None, num_cpus=None, num_gpus=None, resources=None,
 		 object_store_memory=None, redis_max_memory=None, log_to_driver=True, 
@@ -27,12 +27,12 @@ ray.init(redis_address=None, num_cpus=None, num_gpus=None, resources=None,
 redis_address (str) – 要连接到的Redis服务器的地址。如果不提供此地址，则此命令将启动Redis、
 					a global scheduler, a local scheduler, a plasma store, a plasma manager, 和 
 					some workers.它还将在Python退出时终止这些进程。
-num_cpus (int) – 用户希望配置所有本地调度程序的cpu数量。
-num_gpus (int) – 用户希望配置所有本地调度程序的gpu数量。
+num_cpus (int) – 用户希望配置所有本地调度程序的cpu数量，如果没有此选项则默认是调用本地的所有cpu数。
+num_gpus (int) – 用户希望配置所有本地调度程序的gpu数量，如果没有此选项则默认是调用本地的所有gpu数。
 resources – 将资源名称映射到可用资源数量的字典。（就是将资源映射到redis中）
 object_store_memory – 用于启动对象存储的内存量(以字节为单位)。默认情况下，这个上限为20GB，但可以设置得更高。
 redis_max_memory – 允许每个redis碎片使用的最大内存量(以字节为单位)。一旦超过这个限制，redis将开始LRU清除条目。
-					这只适用于切分的redis表(任务、对象和概要表)。默认情况下，这是10GB的上限，但可以设置得更高。
+					这只适用于切分的redis表(任务、对象和概要表)。默认情况下，这是10GB的，但可以设置得更高。
 log_to_driver (bool) – 如果为真，则所有节点上的所有工作进程的输出都将定向到driver。
 node_ip_address (str) – 当前所在节点的IP地址。
 object_id_seed (int) – 用于确定对象ID的生成。可以在同一作业的多个运行中使用相同的值，以便以一致的方式生成对象ID。
@@ -209,10 +209,13 @@ _, _ = f.bar.remote()
 **ray start（ray启动）**
 
     ray start [OPTIONS]
+
+
+
 *Options*
-| --node-ip-address <node_ip_address> | 
+| --node-ip-address <node_ip_address> | 　 | 
 |--|--|
-|此节点的IP地址  | 
+|此节点的IP地址  | 　 | 
 
 | --redis-address <redis_address> |  
 |--|--|
