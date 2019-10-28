@@ -55,4 +55,4 @@ set(ray.get([f.remote() for _ in range(1000)]))		#　set()是剔除重复项
 
 **注意**
 １．启动ray时需要线启动主节点，再启动从节点（子节点）。主节点上运行`ray start --head　--redis-port=6379`,从节点运行运行`ray start --redis-address=<redis-address>`   ,`redis-address`包括主节点ip和端口号。
-２．停止ray的时，先停止从节点，再停止主节点。特别是正在运行程序的时候，直接停止主节点，可能会造成从节点上python异常（丢失python模块）。
+２．停止ray的时，先停止从节点，再停止主节点。特别是正在运行程序的时候，直接停止主节点，可能会造成从节点上python异常（丢失python模块等）。
