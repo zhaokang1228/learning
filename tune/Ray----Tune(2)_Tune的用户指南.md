@@ -504,10 +504,15 @@ $ pip install requests
 
 与正在运行的Tune实验进行交互。请求TuneServer 开始运行。
     `tune_address` :（str）正在运行的TuneServer地址
-    `port_forward`:（int）正在运行的TuneServer端口号
+	
+    `port_forward`:（int）正在运行的TuneServer端口号。
+	
 	`get_all_trials()`:返回所有训练（trial）信息的列表。
+	
 	`get_trial(trial_id)`：通过trial_id返回训练信息。
+	
 	`add_trial(name, specification)`：添加按名称和规范（dict）进行的trial。
+	
 	`stop_trial(trial_id)`:请求停止trial通过trial_id。
 
 该API还支持curl。下面是获得trial的例子(GET /trials/[:id]):
