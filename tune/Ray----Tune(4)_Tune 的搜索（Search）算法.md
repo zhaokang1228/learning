@@ -17,7 +17,7 @@ tune.run(my_function, search_alg=SearchAlgorithm(...))
 默认情况下，Tune使用默认的搜索空间和变量生成（Variant Generation）过程来创建和排队测试。这支持随机搜索和网格搜索作为`tune.run`的指定的`config`参数。
 
 | [class ray.tune.suggest.BasicVariantGenerator(shuffle=False)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/basic_variant.html#BasicVariantGenerator) |  
-|--|--|
+|--|
 
 基础：`ray.tune.suggest.search.SearchAlgorithm`
 使用Tune的变量生成（variant generation）去分析变量。
@@ -47,7 +47,7 @@ tune.run(... , search_alg=BayesOptSearch(bayesopt_space, utility_kwargs=utility_
 一个例子可以在[bayesopt_example.py](https://github.com/ray-project/ray/blob/master/python/ray/tune/examples/bayesopt_example.py)中找到。
 
 | [class ray.tune.suggest.bayesopt.BayesOptSearch(space, max_concurrent=10, reward_attr='episode_reward_mean', utility_kwargs=None, random_state=1, verbose=0, **kwargs)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/bayesopt.html#BayesOptSearch) |  
-|--|--|
+|--|
 
 基础：`ray.tune.suggest.suggestion.SuggestionAlgorithm`
 BayesOpt的一个包装器提供试验建议。
@@ -86,7 +86,7 @@ tune.run(... , search_alg=HyperOptSearch(hyperopt_space, ... ))
 一个例子可以在[hyperopt_example.py](https://github.com/ray-project/ray/blob/master/python/ray/tune/examples/hyperopt_example.py)中找到。
 
 |[class ray.tune.suggest.hyperopt.HyperOptSearch(space, max_concurrent=10, reward_attr='episode_reward_mean', points_to_evaluate=None, **kwargs)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/hyperopt.html#HyperOptSearch)|  
-|--|--|
+|--|
 基础：`ray.tune.suggest.suggestion.SuggestionAlgorithm`
 HyperOpt的一个包装器提供试验建议。
 需要从源代码安装HyperOpt。使用树结构的Parzen Estimators算法，尽管可以简单地扩展为支持HyperOpt使用的任何算法。HyperOpt不会跟踪外部添加的试验。
@@ -143,7 +143,7 @@ tune.run(... , search_alg=SigOptSearch(sigopt_space, ... ))
 一个例子可以在[sigopt_example.py](https://github.com/ray-project/ray/blob/master/python/ray/tune/examples/sigopt_example.py)中找到。
 
 | [class ray.tune.suggest.sigopt.SigOptSearch(space, name='Default Tune Experiment', max_concurrent=1, reward_attr='episode_reward_mean', **kwargs)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/sigopt.html#SigOptSearch) |  
-|--|--|
+|--|
 
 基础：`ray.tune.suggest.suggestion.SuggestionAlgorithm`
 SigOpt的一个包装器提供试验建议。
@@ -201,7 +201,7 @@ tune.run(... , search_alg=NevergradSearch(optimizer, parameter_names, ... ))
 tune的一个例子可以在[nevergrad_example.py](https://github.com/ray-project/ray/blob/master/python/ray/tune/examples/nevergrad_example.py)中找到。
 
 |[class ray.tune.suggest.nevergrad.NevergradSearch(optimizer, parameter_names, max_concurrent=10, reward_attr='episode_reward_mean', **kwargs)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/nevergrad.html#NevergradSearch)|  
-|--|--|
+|--|
 基础：`ray.tune.suggest.suggestion.SuggestionAlgorithm`
 Nevergrad 的一个包装器提供试验建议。
 
@@ -252,7 +252,7 @@ tune.run(... , search_alg=SkOptSearch(optimizer, parameter_names, ... ))
 一个例子可以在[skopt_example.py](https://github.com/ray-project/ray/blob/master/python/ray/tune/examples/skopt_example.py)中找到。
 
 |[class ray.tune.suggest.skopt.SkOptSearch(optimizer, parameter_names, max_concurrent=10, reward_attr='episode_reward_mean', points_to_evaluate=None, evaluated_rewards=None, **kwargs)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/skopt.html#SkOptSearch)  |
-|--|--|
+|--|
 基础：`ray.tune.suggest.suggestion.SuggestionAlgorithm`
 skopt 的一个包装器提供试验建议。
 
@@ -321,7 +321,7 @@ space = SearchSpace({
 
 #### 自定义搜索算法API
 | [class ray.tune.suggest.SearchAlgorithm](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/search.html#SearchAlgorithm) |  
-|--|--|
+|--|
 用于超参数搜索的事件处理程序API的接口。
 和训练调度不同，搜索算法没有能力修改执行（停止和暂停试验）。
 
@@ -349,7 +349,7 @@ space = SearchSpace({
 通常，超参数搜索算法是基于模型的，并且可能非常容易实现。为此，可以扩展以下抽象类并实现`on_trial_result`、`on_trial_complete`和`_suggest`。抽象类将处理特定于Tune的样板文件，如创建试验和排队试验:
 
 |[class ray.tune.suggest.SuggestionAlgorithm](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/suggestion.html#SuggestionAlgorithm)  |
-|--|--|
+|--|
 基础：ray.tune.suggest.search.SearchAlgorithm
 用于基于建议的算法的抽象类。
 自定义搜索算法可以通过覆盖为试验提供生成参数的_`suggest`方法轻松扩展该类。
