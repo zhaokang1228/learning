@@ -322,6 +322,7 @@ space = SearchSpace({
 #### 自定义搜索算法API
 | [class ray.tune.suggest.SearchAlgorithm](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/search.html#SearchAlgorithm) |  
 |--|
+
 用于超参数搜索的事件处理程序API的接口。
 和训练调度不同，搜索算法没有能力修改执行（停止和暂停试验）。
 
