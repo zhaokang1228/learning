@@ -51,7 +51,7 @@ all_trials = tune.run(
     config={"momentum": tune.grid_search([0.1, 0.2])}
 )
 ```
-Tunr可以在Ray的任何地方使用，例如在你的笔记本上的python脚本中使用，或者在自动伸缩集群中实现大规模并行。
+Tune可以在Ray的任何地方使用，例如在你的笔记本电脑上的python脚本中使用，或者在自动伸缩集群中实现大规模并行。
 
 ## 引用Tune
 
