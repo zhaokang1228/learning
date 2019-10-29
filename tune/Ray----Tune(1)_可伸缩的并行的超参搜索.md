@@ -1,6 +1,6 @@
 ﻿本篇仅初步简单介绍Ray中的重要训练框架Tune（可伸缩的并行的超参搜索框架）的特点和简单的入门操作。tune的主要应用是在深度学习和深度强化学习中。可以在GitHub上找到[Tune代码](https://github.com/ray-project/ray/tree/master/python/ray/tune)，要开始使用Tune，需要一定的储备知识，深度学习，Keras库，tensorflow等强化学习的知识。
 
-![enter description here](./images/tune_1.png)
+![enter description here](https://ray.readthedocs.io/en/releases-0.7.3/_images/tune.png)
 
 ## 特点
 
