@@ -1,6 +1,7 @@
 ﻿## Tune概述
 本篇主要介绍Tune的使用向导，首先是Tune的运行框架（如下图），然后具体介绍实验配置信息（Training API、启动和自定义的trial）、Trailing特征（Tune的搜索空间、多次采样、GPU的使用、Trial的检测点和实验的恢复）、大数据的处理、输出结果的自动填充、日志和结果的可视化（自定义日志和自定义同步和上传命令）、Tune客户机API和Tune命令行。
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190404100529353.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI1NTk2Mg==,size_16,color_FFFFFF,t_70)Tune调度集群中进行多次实验。 每个trial都运行一个用户定义的Python函数或类，并通过Tune的Variant Generator的配置变量或用户指定的搜索算法进行参数化。 trial由实验调度员安排和管理。
+![enter description here](https://ray.readthedocs.io/en/releases-0.7.3/_images/tune-api.svg)
+Tune调度集群中进行多次实验。 每个trial都运行一个用户定义的Python函数或类，并通过Tune的Variant Generator的配置变量或用户指定的搜索算法进行参数化。 trial由实验调度员安排和管理。
 关于[实验调度](https://ray.readthedocs.io/en/latest/tune-schedulers.html)和[搜索算法](https://ray.readthedocs.io/en/latest/tune-searchalg.html)请参考官网。
 
 导包和初始化Ray
