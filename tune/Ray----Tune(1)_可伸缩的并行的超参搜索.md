@@ -1,4 +1,6 @@
-﻿本篇仅初步简单介绍Ray中的重要训练框架Tune（可伸缩的并行的超参搜索框架）的特点和简单的入门操作。详细的[tune用户指南请看下一篇](https://blog.csdn.net/weixin_43255962/article/details/89012548)。tune的主要应用是在深度学习和深度强化学习中。可以在GitHub上找到[Tune代码](https://github.com/ray-project/ray/tree/master/python/ray/tune)，要开始使用Tune，需要一定的储备知识，深度学习，Keras库，tensorflow等强化学习的知识。
+﻿本篇仅初步简单介绍Ray中的重要训练框架Tune（可伸缩的并行的超参搜索框架）的特点和简单的入门操作。tune的主要应用是在深度学习和深度强化学习中。可以在GitHub上找到[Tune代码](https://github.com/ray-project/ray/tree/master/python/ray/tune)，要开始使用Tune，需要一定的储备知识，深度学习，Keras库，tensorflow等强化学习的知识。
+
+![enter description here](./images/tune_1.png)
 
 ## 特点
 
@@ -7,11 +9,11 @@
  - 混合并匹配不同的超参数优化方法——例如**HyperOpt with HyperBand** 或 **Nevergrad with HyperBand**.
  - 使用**TensorBoard,** **parallel coordinates (Plot.ly),** 和 **rllab’s VisKit**可视化结果。
  - 在不更改代码的情况下扩展到在大型分布式集群上运行。
- - 使用Tune的资源感知调度，对具有GPU要求或算法的模型进行并行化培训，这些模型本身可以并行和分布，
+ - 使用Tune的资源感知调度，对具有GPU要求或算法的模型进行并行化训练，使这些模型可以并行和分布，
 
 ## 入门指南
 #### 入门指南
-首先安装安装ray来导入Tune。
+首先安装安装ray来导入Tune，Tune被分装到ray模块内了。
 
     pip install ray 
 
