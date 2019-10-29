@@ -202,12 +202,17 @@ max_t (int) –每次试验的最大时间单位。max_t时间单位(由time_att
 实现细节可能会稍微偏离理论，但重点是提高可用性。注:R、s_max、eta为论文给出的HyperBand参数。详情查看[本论文](https://people.eecs.berkeley.edu/~kjamieson/hyperband.html)了解上下文。
 
  1. `s_max`(表示`number of brackets - 1`)和`eta`(表示下采样率)都是固定的。在许多实际设置中，`R`可以设置得相当大，比如`R >= 200`, `R`表示某个资源单元和通常训练迭代的次数。为了简单起见，假设`eta = 3`。在`R = 200`和`R = 1000`之间改变`R`，就会产生一个巨大的范围，需要大量的试验来填充所有的括号。
+ 
  ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413221432199.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI1NTk2Mg==,size_16,color_FFFFFF,t_70)
+ 
   另一方面，在R = 300处保持R不变，并且改变eta也会导致HyperBand构型，这不是很直观:
   ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413221639901.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzI1NTk2Mg==,size_16,color_FFFFFF,t_70)
+  
 该实现采用与论文给出的示例相同的配置，并公开`max_t`, `max_t`不是论文中的参数。
  2. 后文中计算`n_0`的例子实际上与论文给出的算法略有不同。在这个实现中，我们根据论文实现`n_0`(如下例中为n):
+ 
 ![在这里插入图片描述](https://img-blog.csdnimg.cn/20190413222234499.png)
+
  3.还有一些具体的实现细节，比如如何将试验放在括号中，这些在本文中没有涉及。该实现将试验按照较小的括号放在括号内——这意味着试验数量越少，早期停止的次数就越少。
 ## ４．Median Stopping Rule（中值停止规则）
 中值停止规则实现了一个简单的策略，即如果一个试验的性能在相同时间点低于其他试验的中值，则停止该试验。你可以设置`scheduler`参数如下:
