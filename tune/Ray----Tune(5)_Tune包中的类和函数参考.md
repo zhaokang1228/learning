@@ -1,4 +1,4 @@
-本片主要介绍一下tune中常用的一些函数用处，可以作为一个简单的API使用。
+本篇主要介绍一下tune中常用的一些函数用处，可以作为一个简单的API使用。
 ## ray.tune
 | ray.tune.grid_search(values) |   
 |--|
