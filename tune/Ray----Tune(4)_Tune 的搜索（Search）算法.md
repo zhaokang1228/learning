@@ -13,8 +13,11 @@ tune.run(my_function, search_alg=SearchAlgorithm(...))
  - 5.Nevergrad
  - 6.Scikit-Optimize
  - 7.GeneticSearch
+
+注：目前，所有调度程序都采用一个度量标准metric，该度量标准是您的Trainable的结果字典中返回的值，并且根据模式mode而最大化或最小化。(老版本中是所有搜索算法都接受一个reward_attr，即目标参数标准，该值假定为最大化。)。由于此篇写的比较早，故后边的例子主要是按照老版本进行说明的。
+
 #### １．Grid Search and Random Search（网格搜索和随机搜索）
-默认情况下，Tune使用默认的搜索空间和变量生成（Variant Generation）过程来创建和排队测试。这支持随机搜索和网格搜索作为`tune.run`的指定的`config`参数。
+默认情况下，Tune使用默认的搜索空间和变量生成（Variant Generation）过程来创建和排队trail(试验队列)。这支持随机搜索和网格搜索作为`tune.run`的指定的`config`参数。
 
 | [class ray.tune.suggest.BasicVariantGenerator(shuffle=False)](https://ray.readthedocs.io/en/latest/_modules/ray/tune/suggest/basic_variant.html#BasicVariantGenerator) |  
 |--|
@@ -181,6 +184,8 @@ SigOpt的一个包装器提供试验建议。
 >>>     space, name="SigOpt Example Experiment",
 >>>     max_concurrent=1, reward_attr="neg_mean_loss")
 ```
+
+**注**：此算法需要密钥才可以使用，大款可以使用。
 #### ５．Nevergrad Search
 `NevergradSearch`是一个由[Nevergrad](https://github.com/facebookresearch/nevergrad)支持的搜索算法，用于执行基于顺序模型的超参数优化。注意，这个类没有扩展`ray.tune.suggest.BasicVariantGenerator`，因此，在使用NevergradSearch时，您将无法使用Tune的默认变量生成/搜索空间声明。
 
@@ -190,7 +195,7 @@ SigOpt的一个包装器提供试验建议。
 $ pip install nevergrad
 ```
 
-请记住nevergrad是一个Python 3.6库。
+nevergrad是一个Python 3.6的库。
 
 该算法需要使用`nevergrad`提供的优化器，其中有许多选项。一个很好的纲要可以在他们的自述[优化](https://github.com/facebookresearch/nevergrad/blob/master/docs/optimization.md#Choosing-an-optimizer)部分找到。你可以像下面这样使用NevergradSearch:
 
@@ -354,7 +359,7 @@ space = SearchSpace({
 基础：ray.tune.suggest.search.SearchAlgorithm
 用于基于建议的算法的抽象类。
 自定义搜索算法可以通过覆盖为试验提供生成参数的_`suggest`方法轻松扩展该类。
-为了跟踪建议（suggestions ）及其相应的评估，方法`_sugges`t将被传递一个`trial_id`，该id将在后续通知中使用。
+为了跟踪建议（suggestions ）及其相应的评估，方法`_suggest`将被传递一个`trial_id`，该id将在后续通知中使用。
 例子：
 
 ```
